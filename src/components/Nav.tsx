@@ -51,7 +51,7 @@ export default function Nav() {
               key={l.href}
               onClick={() => router.push(l.href)}
               style={{
-                background: 'none', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
+                border: 'none', cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
                 fontSize: 14,
                 fontWeight: path === l.href ? 700 : 500,
                 color: path === l.href ? 'var(--white)' : 'var(--gray)',
