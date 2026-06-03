@@ -6,8 +6,8 @@
 // Step 3 → Show quality report (score, passed checks, errors, warnings)
 // Step 4 → Select development focus tags → save clip record to DB
 
-import { useEffect, useRef, useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { Suspense, useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { analyseClip }  from '@/lib/analyseClip'
 import { DEV_TAGS, DRILLS, getDrillForTags } from '@/lib/devData'
@@ -20,7 +20,6 @@ const CLIP_TYPES = ['Goal', 'Assist', 'Save', 'Skill', 'Tackle', 'Team Move'] as
 
   function UploadPageContent() {
   const router      = useRouter()
-  const params      = null
   const supabase    = createClient()
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -39,7 +38,7 @@ const CLIP_TYPES = ['Goal', 'Assist', 'Save', 'Skill', 'Tackle', 'Team Move'] as
   const [uploadError, setUploadError] = useState('')
 
   const [form, setForm] = useState({
-    player_id:  params.get('player') || '',
+    player_id: '',
     match_date: new Date().toISOString().slice(0, 10),
     opponent:   '',
     clip_type:  'Goal' as typeof CLIP_TYPES[number],
