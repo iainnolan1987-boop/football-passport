@@ -6,7 +6,7 @@
 // Step 3 → Show quality report (score, passed checks, errors, warnings)
 // Step 4 → Select development focus tags → save clip record to DB
 
-import { useEffect, useRef, useState } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { analyseClip }  from '@/lib/analyseClip'
@@ -18,7 +18,7 @@ import '../globals.css'
 
 const CLIP_TYPES = ['Goal', 'Assist', 'Save', 'Skill', 'Tackle', 'Team Move'] as const
 
-export default function UploadPage() {
+  function UploadPageContent() {
   const router      = useRouter()
   const params      = useSearchParams()
   const supabase    = createClient()
@@ -549,4 +549,11 @@ export default function UploadPage() {
       </div>
     </div>
   )
+}
+export default function UploadPage() {
+return (
+<Suspense fallback={<div>Loading upload page...</div>}>
+<UploadPageContent />
+</Suspense>
+)
 }
